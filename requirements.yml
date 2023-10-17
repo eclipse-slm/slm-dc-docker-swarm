@@ -2,7 +2,7 @@
 collections:
   - name: "https://github.com/eclipse-slm/slm-dc-docker"
     type: git
-    version: main
+    version: 1.0.0
 
 roles:
   - src: "git+https://github.com/eclipse-slm/molecule_vsphere"
