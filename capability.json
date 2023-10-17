@@ -1,0 +1,78 @@
+{
+  "id": "5dcb8fc8-556b-4735-9c80-fce546e7bd7a",
+  "capabilityClass": "DeploymentCapability",
+  "name": "Docker-Swarm",
+  "logo": "mdi-docker-swarm",
+  "type": [
+    "SETUP",
+    "DEPLOY",
+    "SCALE"
+  ],
+  "actions": {
+    "INSTALL": {
+      "actionClass": "AwxAction",
+      "actionType": "INSTALL",
+      "awxRepo": "https://github.com/eclipse-slm/slm-dc-docker-swarm",
+      "awxBranch": "1.0.0",
+      "playbook": "install.yml",
+      "connectionTypes": ["ssh"]
+    },
+    "UNINSTALL": {
+      "actionClass": "AwxAction",
+      "actionType": "UNINSTALL",
+      "awxRepo": "https://github.com/eclipse-slm/slm-dc-docker-swarm",
+      "awxBranch": "1.0.0",
+      "playbook": "uninstall.yml",
+      "connectionTypes": ["ssh"]
+    },
+    "SCALE_UP": {
+      "actionClass": "AwxAction",
+      "actionType": "SCALE_UP",
+      "awxRepo": "https://github.com/eclipse-slm/slm-dc-docker-swarm",
+      "awxBranch": "1.0.0",
+      "playbook": "scaleup.yml",
+      "connectionTypes": ["ssh"]
+    },
+    "SCALE_DOWN": {
+      "actionClass": "AwxAction",
+      "actionType": "SCALE_DOWN",
+      "awxRepo": "https://github.com/eclipse-slm/slm-dc-docker-swarm",
+      "awxBranch": "1.0.0",
+      "playbook": "scaledown.yml",
+      "connectionTypes": ["ssh"]
+    },
+    "DEPLOY": {
+      "actionClass": "AwxAction",
+      "actionType": "DEPLOY",
+      "awxRepo": "https://github.com/eclipse-slm/slm-dc-docker-swarm",
+      "awxBranch": "1.0.0",
+      "playbook": "deploy.yml",
+      "connectionTypes": ["ssh"]
+    },
+    "UNDEPLOY": {
+      "actionClass": "AwxAction",
+      "actionType": "UNDEPLOY",
+      "awxRepo": "https://github.com/eclipse-slm/slm-dc-docker-swarm",
+      "awxBranch": "1.0.0",
+      "playbook": "undeploy.yml",
+      "connectionTypes": ["ssh"]
+    }
+  },
+  "supportedDeploymentTypes": [
+    "DOCKER_CONTAINER",
+    "DOCKER_COMPOSE"
+  ],
+  "clusterMemberTypes": [
+    {
+      "prettyName": "Manager",
+      "name": "docker_manager",
+      "minNumber": 3,
+      "scalable": false
+    }, {
+      "prettyName": "Worker",
+      "name": "docker_worker",
+      "minNumber": 1,
+      "scalable": true
+    }
+  ]
+}
