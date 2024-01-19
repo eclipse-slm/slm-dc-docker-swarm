@@ -1,0 +1,41 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: delegated
+platforms:
+  - name: ubuntu1804-1
+    image_name: ansible-dev-ubuntu-18-04
+    groups:
+      - docker_manager
+
+  - name: ubuntu1804-2
+    image_name: ansible-dev-ubuntu-18-04
+    groups:
+      - docker_manager
+
+  - name: ubuntu1804-3
+    image_name: ansible-dev-ubuntu-18-04
+    groups:
+      - docker_manager
+
+  - name: ubuntu1804-4
+    image_name: ansible-dev-ubuntu-18-04
+    groups:
+      - docker_worker
+
+  - name: ubuntu1804-5
+    image_name: ansible-dev-ubuntu-18-04
+    groups:
+      - docker_worker
+      - scale_up_host
+      - scale_down_host
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create-os.yml
+    destroy: ../default/destroy-os.yml
+    converge: ../default-install/converge.yml
+    verify: ../default-install/verify.yml
+verifier:
+  name: ansible

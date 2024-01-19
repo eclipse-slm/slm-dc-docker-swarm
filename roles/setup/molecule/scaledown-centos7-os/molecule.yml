@@ -1,0 +1,43 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: delegated
+
+platforms:
+  - name: centos7-1
+    image_name: ansible-dev-centos-7
+    groups:
+      - docker_manager
+
+  - name: centos7-2
+    image_name: ansible-dev-centos-7
+    groups:
+      - docker_manager
+
+  - name: centos7-3
+    image_name: ansible-dev-centos-7
+    groups:
+      - docker_manager
+
+  - name: centos7-4
+    image_name: ansible-dev-centos-7
+    groups:
+      - docker_worker
+
+  - name: centos7-5
+    image_name: ansible-dev-centos-7
+    groups:
+      - docker_worker
+      - scale_down_host
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create-os.yml
+    destroy: ../default/destroy-os.yml
+    prepare: ../default-install/converge.yml
+    converge: ../default-scaledown/converge.yml
+    verify: ../default-scaledown/verify.yml
+
+verifier:
+  name: ansible

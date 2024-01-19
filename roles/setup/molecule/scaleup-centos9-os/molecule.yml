@@ -1,0 +1,44 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: delegated
+
+platforms:
+  - name: centos9-1
+    image_name: ansible-dev-centos-9-stream
+    groups:
+      - docker_manager
+
+  - name: centos9-2
+    image_name: ansible-dev-centos-9-stream
+    groups:
+      - docker_manager
+
+  - name: centos9-3
+    image_name: ansible-dev-centos-9-stream
+    groups:
+      - docker_manager
+
+  - name: centos9-4
+    image_name: ansible-dev-centos-9-stream
+    groups:
+      - docker_worker
+
+  - name: centos9-5
+    image_name: ansible-dev-centos-9-stream
+    groups:
+      - docker_worker
+      - scale_up_host
+      - scale_down_host
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create-os.yml
+    destroy: ../default/destroy-os.yml
+    prepare: ../default-install/converge.yml
+    converge: ../default-scaleup/converge.yml
+    verify: ../default-scaleup/verify.yml
+
+verifier:
+  name: ansible
