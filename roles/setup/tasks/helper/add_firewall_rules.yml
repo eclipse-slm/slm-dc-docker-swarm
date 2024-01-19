@@ -1,5 +1,10 @@
-- name: "Add firewall rules (CentOS)"
-  when: ansible_distribution == 'CentOS'
+- name: Populate service facts
+  ansible.builtin.service_facts:
+
+- name: "Add firewall rules"
+  when:
+    - ansible_facts.services['firewalld.service'] is defined
+    - ansible_facts.services['firewalld.service'].status != 'not-found'
   block:
     - name: "Add rule"
       ansible.posix.firewalld:
