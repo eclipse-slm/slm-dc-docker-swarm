@@ -39,7 +39,8 @@
         name: setup
         tasks_from: scale_down.yml
 
-    - name: "Include fabos.docker.setup - uninstall"
-      include_role:
-        name: fabos.docker.setup
-        tasks_from: uninstall.yml
+    - name: "Include docker role - uninstall"
+      ansible.builtin.include_role:
+        name: docker
+      vars:
+        state: absent
