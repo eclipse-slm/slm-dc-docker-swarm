@@ -3,7 +3,7 @@
     host_ip_address: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
 
 - name: Install required pip modules
-  pip:
+  ansible.builtin.pip:
     name:
       - jsondiff
 
