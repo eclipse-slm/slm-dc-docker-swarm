@@ -3,14 +3,10 @@
   hosts: all
   gather_facts: yes
   become: yes
-
-  collections:
-    - fabos.docker
   tasks:
-    - name: "Include fabos.docker.setup - install"
-      include_role:
-        name: fabos.docker.setup
-        tasks_from: install.yml
+    - name: "Include docker role"
+      ansible.builtin.include_role:
+        name: docker
 
 # Get Swarm facts
 - name: Get Swarm facts
@@ -18,7 +14,6 @@
   gather_facts: yes
   run_once: yes
   become: yes
-
   tasks:
     - name: "Include fabos.docker_swarm.setup - setup_manager_first.yml"
       include_role:
@@ -30,7 +25,6 @@
   hosts: docker_worker
   gather_facts: yes
   become: yes
-
   tasks:
     - name: "Include fabos.docker_swarm.setup - setup_worker.yml"
       include_role:

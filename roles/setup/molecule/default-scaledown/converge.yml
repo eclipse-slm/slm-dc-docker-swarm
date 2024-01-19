@@ -1,21 +1,7 @@
 ---
-- name: Converge - Gather Facts
-  hosts: all
-  gather_facts: no
-  become: yes
-  tasks:
-    - name: Gather Facts
-      ansible.builtin.setup:
-        gather_subset:
-          - min
-          - network
-      register: setup_result
-      until: setup_result.failed != true
-      retries: 10
-
 - name: Converge - Leave Swarm and Uninstall docker
   hosts: scale_down_host
-  gather_facts: no
+  gather_facts: yes
   become: yes
   tasks:
     - name: "Include fabos.docker_swarm.setup - uninstall"
@@ -23,7 +9,8 @@
         name: setup
         tasks_from: scale_down.yml
 
-    - name: "Include fabos.docker.setup - uninstall"
-      include_role:
-        name: fabos.docker.setup
-        tasks_from: uninstall.yml
+    - name: "Include docker role - uninstall"
+      ansible.builtin.include_role:
+        name: docker
+      vars:
+        state: absent

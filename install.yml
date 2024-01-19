@@ -13,10 +13,9 @@
   gather_facts: yes
   become: yes
   tasks:
-    - name: "Include fabos.docker.setup - install"
-      include_role:
-        name: fabos.docker.setup
-        tasks_from: install.yml
+    - name: "Include docker role"
+      ansible.builtin.include_role:
+        name: docker
 
 - name: Setup First Manager
   hosts: docker_manager[0]

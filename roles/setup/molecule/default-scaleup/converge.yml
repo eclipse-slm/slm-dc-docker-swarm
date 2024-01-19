@@ -1,42 +1,19 @@
 ---
 - name: Converge - Install docker
   hosts: all
-  gather_facts: no
-
+  gather_facts: yes
   become: yes
-
   tasks:
-    - name: Gather Facts
-      ansible.builtin.setup:
-        gather_subset:
-          - min
-          - network
-      register: setup_result
-      until: setup_result.failed != true
-      retries: 10
-
-- name: Converge - Install docker
-  hosts: all
-  gather_facts: no
-
-  become: yes
-
-  collections:
-    - fabos.docker
-  tasks:
-    - name: "Include fabos.docker.setup - install"
-      include_role:
-        name: fabos.docker.setup
-        tasks_from: install.yml
+    - name: "Include docker role"
+      ansible.builtin.include_role:
+        name: docker
 
 # Get Swarm facts
 - name: Get Swarm facts
   hosts: docker_manager
   gather_facts: no
   run_once: yes
-
   become: yes
-
   tasks:
     - name: "Include fabos.docker_swarm.setup - setup_manager_first.yml"
       include_role:
@@ -47,9 +24,7 @@
 - name: Converge - Setup Workers
   hosts: docker_worker
   gather_facts: no
-
   become: yes
-
   tasks:
     - name: "Include fabos.docker_swarm.setup - setup_worker.yml"
       include_role:

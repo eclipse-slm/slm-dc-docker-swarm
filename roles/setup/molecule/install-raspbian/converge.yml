@@ -3,14 +3,10 @@
   hosts: all:!scale_up_host
   gather_facts: yes
   become: yes
-
-  collections:
-    - fabos.docker
   tasks:
-    - name: "Include fabos.docker.setup - install"
-      include_role:
-        name: fabos.docker.setup
-        tasks_from: install.yml
+    - name: "Include docker role"
+      ansible.builtin.include_role:
+        name: docker
 
 - name: Converge - Setup First Manager
   hosts: docker_manager[0]
