@@ -28,8 +28,8 @@ provisioner:
   name: ansible
   playbooks:
     create: ../../../setup/molecule/default/create.yml
-    prepare: ../default-undeploy/prepare.yml
     destroy: ../../../setup/molecule/default/destroy.yml
+    prepare: ../default-undeploy/prepare.yml
     converge: ../default-undeploy/converge.yml
     verify: ../default-undeploy/verify.yml
 
