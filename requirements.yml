@@ -1,11 +1,11 @@
 ---
-collections:
-  - name: "https://github.com/eclipse-slm/slm-dc-docker"
-    type: git
-    version: 1.0.0
-
 roles:
   - src: "git+https://github.com/eclipse-slm/molecule_vsphere"
     scm: git
     version: main
     name: molecule_vsphere
+
+  - src: "git+https://github.com/FabOS-AI/molecule_openstack"
+    scm: git
+    version: main
+    name: molecule_openstack
