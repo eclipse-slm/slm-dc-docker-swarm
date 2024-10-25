@@ -29,6 +29,11 @@
     state: absent
     name: "{{ service_id }}"
   run_once: true
+  register: docker_stack
+  retries: 5
+  delay: 5
+  until: docker_stack.failed == false
+
 
 - name: "Remove Volumes"
   community.docker.docker_volume:
